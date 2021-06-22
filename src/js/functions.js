@@ -21,3 +21,26 @@ test = (input, a, b, delta, cont = 0) => {
     }
   }
 };
+
+//  Método da Divisão ao Meio
+
+Bisseccao = (input, a, b, epsilon) => {
+  if (evaluate(input, { x: a }) * evaluate(input, { x: b }) < 0) {
+    while (Math.abs(b - a) / 2 > epsilon) {
+      xi = (a + b) / 2;
+      if (evaluate(input, { x: xi }) == 0) {
+        console.log(`Raíz é: ${xi}`); // Certeza
+        break;
+      } else {
+        if (evaluate(input, { x: a }) * evaluate(input, { x: xi }) < 0) {
+          b = xi;
+        } else {
+          a = xi;
+        }
+      }
+    }
+    console.log(`Valor da Raiz é: ${xi}`);
+  } else {
+    console.log(`Não há raiz nesse intervalo!`);
+  }
+};
