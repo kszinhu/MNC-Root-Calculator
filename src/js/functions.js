@@ -4,7 +4,7 @@ evaluate = (input, variables) => {
 };
 
 // parametros (f(x), a, b, delta)
-test = (input, a, b, delta, cont = 0) => {
+BuscaUniforme = (input, a, b, delta, cont = 0) => {
   for (let x = a; x < b; x += delta) {
     let p = x;
     let q = p + delta;
@@ -22,24 +22,28 @@ test = (input, a, b, delta, cont = 0) => {
   }
 };
 
-//  Método da Divisão ao Meio
+/** Método da Divisão ao Meio
+ * Quando se tem certeza que existe uma raiz no intervalo de busca e existe apenas uma,
+ *  caso contrário método poderá falhar
+ */
 
 Bisseccao = (input, a, b, epsilon) => {
-  if (evaluate(input, { x: a }) * evaluate(input, { x: b }) < 0) {
-    while (Math.abs(b - a) / 2 > epsilon) {
-      xi = (a + b) / 2;
-      if (evaluate(input, { x: xi }) == 0) {
-        console.log(`Raíz é: ${xi}`); // Certeza
-        break;
+  while (Math.abs(b - a) / 2 > epsilon) {
+    xi = (a + b) / 2;
+    if (evaluate(input, { x: xi }) == 0) {
+      console.log(`Raíz é: ${xi}`); // Certeza
+      break;
+    } else {
+      if (evaluate(input, { x: a }) * evaluate(input, { x: xi }) < 0) {
+        b = xi;
       } else {
-        if (evaluate(input, { x: a }) * evaluate(input, { x: xi }) < 0) {
-          b = xi;
-        } else {
-          a = xi;
-        }
+        a = xi;
       }
     }
-    console.log(`Valor da Raiz é: ${xi}`);
+  }
+  console.log(`Valor da Raiz é: ${xi}`);
+};
+
 /** Método das Cordas
  * Quando se tem certeza que existe uma raiz no intervalo de busca e existe apenas uma,
  *  caso contrário método poderá falhar
