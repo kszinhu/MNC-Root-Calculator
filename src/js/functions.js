@@ -40,7 +40,28 @@ Bisseccao = (input, a, b, epsilon) => {
       }
     }
     console.log(`Valor da Raiz é: ${xi}`);
-  } else {
-    console.log(`Não há raiz nesse intervalo!`);
+/** Método das Cordas
+ * Quando se tem certeza que existe uma raiz no intervalo de busca e existe apenas uma,
+ *  caso contrário método poderá falhar
+ */
+
+Cordas = (input, a, b, epsilon) => {
+  while (Math.abs(b - a) > epsilon) {
+    xi =
+      (a * Math.abs(evaluate(input, { x: b })) +
+        b * Math.abs(evaluate(input, { x: a }))) /
+      (Math.abs(evaluate(input, { x: b })) +
+        Math.abs(evaluate(input, { x: a })));
+    if (evaluate(input, { x: xi }) == 0) {
+      console.log(`Raíz é: ${xi}`); // Certeza
+      break;
+    } else {
+      if (evaluate(input, { x: a }) * evaluate(input, { x: xi }) < 0) {
+        b = xi;
+      } else {
+        a = xi;
+      }
+    }
   }
+  console.log(`Valor da Raiz é: ${xi}`);
 };
