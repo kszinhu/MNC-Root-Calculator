@@ -69,3 +69,39 @@ Cordas = (input, a, b, epsilon) => {
   }
   console.log(`Valor da Raiz é: ${xi}`);
 };
+
+//  Método de Newton
+
+Newton = (input, a, epsilon, maxIt) => {
+  k = 0;
+  p = a;
+  do {
+    k = k + 1;
+    q = p;
+    if(calculateFirstDerivative(p, x, epsilon) != 0) {
+    p = p - (evaluate(input, { x: p }) / calculateFirstDerivative(p, x, epsilon));
+    } else if(calculateFirstDerivative(p, x, epsilon) == 0) {  // se f'(x) = 0, reinicie com outro p ou recalcule f' comp+epsilon
+      p = p - (evaluate(input, { x: p }) / calculateFirstDerivative(p+epsilon, x, epsilon)); 
+    }
+  } while((Math.abs(p-q) >= epsilon) && (k != maxIt));
+};
+
+//  Método de Newton Modificado
+
+modifiedNewton = (input, a, epsilon, maxIt) => {
+  k = 0;
+  p = a;
+  do {
+    if((k % 5) == 0) { // mod 5
+      if(calculateFirstDerivative(p, x, epsilon) == 0) {  // se f'(x) = 0, reinicie com outro p ou recalcule f' com p+epsilon
+        p = p - (evaluate(input, { x: p }) / calculateFirstDerivative(p+epsilon, x, epsilon));
+      }else{
+        d = calculateFirstDerivative(p, x, epsilon);
+      } 
+    } else {
+      k = k+1;
+      q = p;
+      p = p - ((evaluate(input, { x: p }) / d));
+    }
+  } while((Math.abs(p-q) >= epsilon) && (k != maxIt));
+};
