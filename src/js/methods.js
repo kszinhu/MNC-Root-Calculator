@@ -1,6 +1,11 @@
+/** Busca Uniforme
+ * Encontra indício de raízes no intervalo
+ */
 
 BuscaUniforme = (input, a, b, delta, cont = 0) => {
-  input = formattingExpression(input);
+  let arrayA = [];
+  let arrayB = [];
+
   for (let x = a; x < b; x += delta) {
     let p = x;
     let q = p + delta;
@@ -8,7 +13,9 @@ BuscaUniforme = (input, a, b, delta, cont = 0) => {
       Math.sign(evaluate(input, { x: p })) !=
       Math.sign(evaluate(input, { x: q }))
     ) {
-      console.log(`Achou intervalo que há uma raíz ${cont++}`);
+      console.log(`Achou intervalo que há uma raíz ${++cont}`);
+      arrayA.push(p);
+      arrayB.push(q);
     } else if (
       (evaluate(input, { x: p }) && evaluate(input, { x: q }) == 0) ||
       true
@@ -16,6 +23,7 @@ BuscaUniforme = (input, a, b, delta, cont = 0) => {
       console.log("Não há raízes no intervalo");
     }
   }
+  return { a: arrayA, b: arrayB };
 };
 
 /** Método da Divisão ao Meio
