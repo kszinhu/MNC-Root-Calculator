@@ -5,92 +5,108 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="icon" href="./favicon.ico" />
+  <link rel="stylesheet" href="./src/css/global.css">
+  <link rel="stylesheet" href="./src/css/style.css">
   <title>Raízes de funções reais com uma variável real</title>
 </head>
 
 <body>
-  <div>
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Title -->
     <div class="title">
       <h1>Raízes de funções com uma variável real</h1>
       <span>Calculadora de raízes usando métodos numéricos</span>
     </div>
-    <!-- Sessão 1 -->
-    <div class="separate-roots">
-      <!-- Formulário 1 -->
-      <form action="/" id='form'>
-        <div class="form-one">
-          <p>Função, intervalo de busca e passo para separar intervalos com indício de corter raízes</p>
-          <div class="function-item">
-            <input type="text" placeholder="F(x)" required />
-          </div>
-          <div class="prop-item">
-            <input type="text" placeholder="a" onchange="this.value = this.value.replace(/,/g, '.')" required />
-            <input type="text" placeholder="b" onchange="this.value = this.value.replace(/,/g, '.')" required />
-            <input type="text" placeholder="&Delta;" onchange="this.value = this.value.replace(/,/g, '.')" required />
-          </div>
-          <input type="submit" value="CALCULAR" id="submit" />
-        </div>
-      </form>
-      <!-- Tabela c/ valores -->
-      <div class="table-submit">
-      </div>
-    </div>
-    <!-- Sessão 2 -->
-    <div class="calculate-methods">
-      <div>
-        <!-- Formulário 2 -->
-        <form action="/" id='form'>
-          <div class="form-two">
-            <p>Função, intervalo de busca e precisão para calcular raíz no intervalo</p>
-            <div class="function-item">
-              <input type="text" placeholder="F(x)" required />
+
+    <!-- Conteúdo -->
+    <div class="content">
+
+      <!-- Sessão 1 -->
+      <div class="separate-roots">
+        <!-- Formulário 1 -->
+        <form action="" id='root-form' onsubmit="separateRoot(); return false">
+          <div class="form-one">
+            <p>Função, intervalo de busca e passo para separar intervalos com indício de corter raízes</p>
+            <div class="root-item">
+              <input id="root-function" type="text" placeholder="F(x)" required />
             </div>
             <div class="prop-item">
-              <input type="text" placeholder="a" onchange="this.value = this.value.replace(/,/g, '.')" required />
-              <input type="text" placeholder="b" onchange="this.value = this.value.replace(/,/g, '.')" required />
-              <input type="text" placeholder="&epsilon;" onchange="this.value = this.value.replace(/,/g, '.')"
+              <input id="root-a" type="text" placeholder="a" onchange="this.value = this.value.replace(/,/g, '.')"
                 required />
+              <input id="root-b" type="text" placeholder="b" onchange="this.value = this.value.replace(/,/g, '.')"
+                required />
+              <input id="root-delta" type="text" placeholder="&Delta;"
+                onchange="this.value = this.value.replace(/,/g, '.')" required />
             </div>
+            <input type="submit" value="CALCULAR" id="root-submit" />
           </div>
-          <input type="submit" value="CALCULAR" id="submit" />
         </form>
-      </div>
-      <!-- Sessão de opções -->
-      <div class="options">
-        <!-- Selecionar método -->
-        <div class="methods">
-          <input type="radio" value=1 id="BuscaUniforme" name="methods" checked />
-          <label for="BuscaUniforme" class="radio">Busca Uniforme</label>
-          <input type="radio" value=2 id="HopeMethod" name="methods" checked />
-          <label for="HopeMethod" class="radio">Método das Cordas</label>
-          <input type="radio" value=3 id="NewtonMethod" name="methods" checked />
-          <label for="NewtonMethod" class="radio">Método das Método de Newton</label>
-          <input type="radio" value=4 id="BissectionMethod" name="methods" checked />
-          <label for="BissectionMethod" class="radio">Método da Bissecção</label>
-          <input type="radio" value=5 id="ModifiedHopeMethod" name="methods" checked />
-          <label for="ModifiedHopeMethod" class="radio">Método das Cordas (Modificado))</label>
-          <input type="radio" value=6 id="ModifiedMethod" name="methods" checked />
-          <label for="HopeMethod" class="radio">Método de Newton (Modificado)</label>
-        </div>
-        <!-- Mais configurações -->
-        <div id="more-options">
-          <input type="checkbox" id="iterations" name="iterations">
-          <label for="iterations">Iterações: </label>
-          <input type="checkbox" id="graph" name="graph">
-          <label for="graph">Gráfico após cálculo</label>
+        <!-- Tabela c/ valores -->
+        <div id="table-submit">
         </div>
       </div>
-      <!-- Sessão do resultado -->
-      <div class="solution">
+
+      <!-- Sessão 2 -->
+      <div class="calculate-methods">
+        <div>
+          <!-- Formulário 2 -->
+          <form action="/" id='form'>
+            <div class="form-two">
+              <p>Função, intervalo de busca e precisão para calcular raíz no intervalo</p>
+              <div class="function-item">
+                <input type="text" placeholder="F(x)" required />
+              </div>
+              <div class="prop-item">
+                <input type="text" placeholder="a" onchange="this.value = this.value.replace(/,/g, '.')" required />
+                <input type="text" placeholder="b" onchange="this.value = this.value.replace(/,/g, '.')" required />
+                <input type="text" placeholder="&epsilon;" onchange="this.value = this.value.replace(/,/g, '.')"
+                  required />
+              </div>
+            </div>
+            <input type="submit" value="CALCULAR" id="submit" />
+          </form>
+        </div>
+        <!-- Sessão de opções -->
+        <div class="options">
+          <!-- Selecionar método -->
+          <div class="methods">
+            <input type="radio" value=1 id="BuscaUniforme" name="methods" checked />
+            <label for="BuscaUniforme" class="radio">Busca Uniforme</label>
+            <input type="radio" value=2 id="HopeMethod" name="methods" checked />
+            <label for="HopeMethod" class="radio">Método das Cordas</label>
+            <input type="radio" value=3 id="NewtonMethod" name="methods" checked />
+            <label for="NewtonMethod" class="radio">Método das Método de Newton</label>
+            <input type="radio" value=4 id="BissectionMethod" name="methods" checked />
+            <label for="BissectionMethod" class="radio">Método da Bissecção</label>
+            <input type="radio" value=5 id="ModifiedHopeMethod" name="methods" checked />
+            <label for="ModifiedHopeMethod" class="radio">Método das Cordas (Modificado))</label>
+            <input type="radio" value=6 id="ModifiedMethod" name="methods" checked />
+            <label for="HopeMethod" class="radio">Método de Newton (Modificado)</label>
+          </div>
+          <!-- Mais configurações -->
+          <div id="more-options">
+            <input type="checkbox" id="iterations" name="iterations">
+            <label for="iterations">Iterações: </label>
+            <input type="checkbox" id="graph" name="graph">
+            <label for="graph">Gráfico após cálculo</label>
+          </div>
+        </div>
+        <!-- Sessão do resultado -->
+        <div class="solution">
+        </div>
       </div>
+
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.0/dist/chart.min.js" />
-  <script src="src/js/main.js" />
-  <script src="src/js/functions.js" />
-  <script src="src/js/methods.js" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.0/dist/chart.min.js"></script>
+  <script src="src/js/main.js"></script>
+  <script src="src/js/functions.js"></script>
+  <script src="src/js/methods.js"></script>
 </body>
 
 </html>

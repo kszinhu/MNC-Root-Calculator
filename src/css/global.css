@@ -1,0 +1,21 @@
+:root {
+  --primary: #FF9E16;
+  --primary-dark: #c77e11;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body, button {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+body {
+  overflow-x: hidden;
