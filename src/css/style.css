@@ -12,3 +12,123 @@ div.title h1 {
 div.title span {
   font-size: 16px;
 }
+
+div.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+div.more-buttons {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+  color: white;
+  border-style: none;
+}
+
+.btn {
+  color: #ffffff;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0072be;
+}
+
+.input-item {
+  margin: 10px;
+  width: 30%;
+}
+
+.root-function {
+  width: 100%;
+}
+
+.prop-item {
+  display: flex;
+  padding: 2%;
+}
+
+/* Primeira sessão */
+div.separate-roots {
+  margin: 20px;
+}
+
+.table-root {
+  margin: 1em;
+}
+
+.table-root td {
+  padding: 1em;
+}
+
+.table-root td:first-child {
+  color: white;
+  background-color: #0099ff;
+  border-radius: 8px;
+}
+
+#table-submit {
+  overflow: auto;
+}
+
+/* Scrollbar in result Div */
+
+div::-webkit-scrollbar {
+  height: 8px;
+}
+
+div::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 10px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+/* Segunda sessão */
+div.calculate-methods {
+  margin: 20px;
+}
+
+div.methods {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.method-solution {
+  margin: 1em;
+}
+
+.radio-methods ul {
+  list-style: none;
+  margin: 1em;
+  overflow: auto;
+}
+
+span.root-value {
+  padding: 5px 20px;
+  border-radius: 8px;
+  background: #000;
+  color: #aaa;
+}
+
+span#iterations {
+  padding: 5px 20px;
+  border-radius: 8px;
+  background: #000;
+  color: #aaa;
+}
+
+.title {
+  padding: 1em 1em;
+}
