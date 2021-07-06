@@ -2,15 +2,172 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./images/favicon.ico" />
-    <title>Teste</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="./favicon.ico" />
+  <link rel="stylesheet" href="./src/css/global.css">
+  <link rel="stylesheet" href="./src/css/style.css">
+  <title>Raízes de funções reais com uma variável real</title>
 </head>
 
 <body>
-    <h1>Programa</h1>
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Title -->
+    <div class="title">
+      <h1>Raízes de funções com uma variável real</h1>
+      <span>Calculadora de raízes usando métodos numéricos</span>
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="content">
+
+      <!-- Sessão 1 -->
+      <div class="separate-roots">
+        <!-- Formulário 1 -->
+        <form action="" id='root-form' onsubmit="separateRoot(); return false">
+          <div class="form-one">
+            <div class="title">
+              <p>Função, intervalo de busca e passo para separar intervalos com indício de conter raízes</p>
+            </div>
+            <div class="root-item">
+              <input class="root-function" id="root-function" type="text" placeholder="F(x)" />
+            </div>
+            <div class="prop-item">
+              <input class="input-item" id="root-delta" type="text" placeholder="&Delta;"
+                onchange="this.value = this.value.replace(/,/g, '.')" />
+              <input class="input-item" id="root-a" type="text" placeholder="a"
+                onchange="this.value = this.value.replace(/,/g, '.')" />
+              <input class="input-item" id="root-b" type="text" placeholder="b"
+                onchange="this.value = this.value.replace(/,/g, '.')" />
+            </div>
+            <div class="buttons">
+              <button class="btn submit" type="submit"
+                onclick="document.querySelector('#canva-graph').style = 'display: none'"><i
+                  class="fas fa-calculator"></i>
+                Calcular</button>
+              <div class="more-buttons">
+                <button class="btn" onclick="genGraph(
+                  document.querySelector('#canva-graph'),
+                  document.querySelector('#root-function').value,
+                  { a: Number(document.querySelector('#root-a').value),
+                    b: Number(document.querySelector('#root-b').value) }
+                );
+                document.querySelector('#canva-graph').style = 'display: block'
+                return false;">
+                  <i class="fas fa-chart-area"></i>
+                  Gerar
+                  Gráfico
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Tabela c/ valores -->
+        <div id="table-submit">
+        </div>
+        <div id='graph-space'>
+          <canvas id="canva-graph" hidden></canvas>
+        </div>
+      </div>
+
+      <hr
+        style="border: 0; height: 2px; background-image: linear-gradient(to right, transparent, #CCC, transparent); margin: 20px;">
+
+      <!-- Sessão 2 -->
+      <div class="calculate-methods">
+        <div>
+          <!-- Formulário 2 -->
+          <form action="/" id='form' onsubmit="methodRoot(); return false">
+            <div class="form-two">
+              <div class="title">
+                <p>Função, intervalo de busca e precisão para calcular raíz no intervalo</p>
+              </div>
+              <div class="function-item">
+                <input class="root-function" id="croot-function" type="text" placeholder="F(x)" />
+              </div>
+              <div class="prop-item" id="form-methods">
+                <!-- Propriedades -->
+                <input class="input-item" id="croot-epsilon" type="text" placeholder="&epsilon;"
+                  onchange="this.value = this.value.replace(/,/g, '.')" />
+                <input class="input-item" id="croot-a" type="text" placeholder="a"
+                  onchange="this.value = this.value.replace(/,/g, '.')" />
+                <input class="input-item" id="croot-b" type="text" placeholder="b"
+                  onchange="this.value = this.value.replace(/,/g, '.')" />
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="btn submit" type="submit"><i class="fas fa-calculator"></i> Calcular</button>
+              <!-- <input class="btn submit" type="submit" value="Calcular" id="root-submit" /> -->
+            </div>
+        </div>
+        </form>
+      </div>
+      <!-- Sessão de opções -->
+      <div class="options">
+        <!-- Selecionar método -->
+        <div class="radio-methods">
+          <ul>
+            <li class="switcher-methods">
+              <label for="BuscaUniforme" class="radio">
+                <input type="radio" value=1 id="BuscaUniforme" name="methods" onclick="load()" checked />
+                Busca Uniforme
+              </label>
+            </li>
+
+            <li class="switcher-methods">
+              <label for="HopeMethod" class="radio">
+                <input type="radio" value=2 id="HopeMethod" name="methods" onclick="load()" />
+                Método das Cordas
+              </label>
+            </li>
+
+            <li class="switcher-methods">
+              <label for="NewtonMethod" class="radio">
+                <input type="radio" value=3 id="NewtonMethod" name="methods" onclick="load()" />
+                Método de Newton
+              </label>
+            </li>
+
+            <li class="switcher-methods">
+              <label for="BissectionMethod" class="radio">
+                <input type="radio" value=4 id="BissectionMethod" name="methods" onclick="load()" />
+                Método da Bissecção
+              </label>
+            </li>
+
+            <li class="switcher-methods">
+              <label for="ModifiedHopeMethod" class="radio">
+                <input type="radio" value=5 id="ModifiedHopeMethod" name="methods" onclick="load()" />
+                Método das Cordas (Modificado)
+              </label>
+            </li>
+
+            <li class="switcher-methods">
+              <label for="HopeMethod" class="radio">
+                <input type="radio" value=6 id="ModifiedMethod" name="methods" onclick="load()" />
+                Método de Newton (Modificado)
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Sessão do resultado -->
+      <div class="method-solution">
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.0/dist/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="src/js/main.js"></script>
+  <script src="src/js/functions.js"></script>
+  <script src="src/js/methods.js"></script>
 </body>
 
 </html>

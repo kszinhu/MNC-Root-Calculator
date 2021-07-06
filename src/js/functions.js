@@ -5,7 +5,7 @@
  * @return {output} string of the formatted mathematical expression.
  */
 function formattingExpression(input) {
-  const output = input
+  return input
     .replace(/sen|sin/gi, "sin")
     .replace(/cos/gi, "cos")
     .replace(/tg|tan/gi, "tan")
@@ -14,7 +14,6 @@ function formattingExpression(input) {
     .replace(/\log\D/gi, "log10(")
     .replace(/\ln/gi, "log")
     .replace(/\e/gi, "Math.E");
-  return output;
 }
 
 /**
@@ -47,26 +46,53 @@ function calculateFirstDerivative(input, x, epsilon) {
  * @param {variables} object with various value and value respectively (key:value).
  * @return {output} value at the point of the derivative.
  */
-evaluate = (input, variables) => {
+const evaluate = (input, variables) => {
   with (variables) with (Math) return eval(input);
 };
 
-// parametros (f(x), a, b, delta)
-BuscaUniforme = (input, a, b, delta, cont = 0) => {
-  input = formattingExpression(input);
-  for (let x = a; x < b; x += delta) {
-    let p = x;
-    let q = p + delta;
-    if (
-      Math.sign(evaluate(input, { x: p })) !=
-      Math.sign(evaluate(input, { x: q }))
-    ) {
-      console.log(`Achou intervalo que há uma raíz ${cont++}`);
-    } else if (
-      (evaluate(input, { x: p }) && evaluate(input, { x: q }) == 0) ||
-      true
-    ) {
-      console.log("Não há raízes no intervalo");
-    }
-  }
+const genGraph = (element, input, { a, b }) => {
+  if (!element || !input || !a || !b) return false;
+  element.hidden = false;
+  var data = {
+    labels: Array.from({ length: Math.abs(a - b) }, (v, k) => k + a),
+    datasets: [
+      {
+        label: input,
+        function: (x) => evaluate(formattingExpression(input), { x: x }),
+        borderColor: "rgba(75, 192, 192, 1)",
+        data: [],
+        fill: false,
+      },
+    ],
+  };
+
+  Chart.pluginService.register({
+    beforeInit: function (chart) {
+      var data = chart.config.data;
+      for (var i = 0; i < data.datasets.length; i++) {
+        for (var j = 0; j < data.labels.length; j++) {
+          var fct = data.datasets[i].function,
+            x = data.labels[j],
+            y = fct(x);
+          data.datasets[i].data.push(y);
+        }
+      }
+    },
+  });
+
+  var ChartLine = new Chart(element, {
+    type: "line",
+    data: data,
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    },
+  });
 };
