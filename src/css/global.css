@@ -1,6 +1,8 @@
 :root {
   --primary: #006eff;
   --primary-dark: #003f92;
+  background-color: #8e8e8e;
+  color: #111;
 }
 
 * {
@@ -11,14 +13,21 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 body {
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #eee;
 }
 
 /* Input - Radio */
